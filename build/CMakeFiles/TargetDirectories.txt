@@ -1,0 +1,3 @@
+/Users/mansonjones/sandbox/udacity/cpp/CppND-Memory-Management-Chatbot/build/CMakeFiles/rebuild_cache.dir
+/Users/mansonjones/sandbox/udacity/cpp/CppND-Memory-Management-Chatbot/build/CMakeFiles/edit_cache.dir
+/Users/mansonjones/sandbox/udacity/cpp/CppND-Memory-Management-Chatbot/build/CMakeFiles/membot.dir
