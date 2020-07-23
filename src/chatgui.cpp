@@ -115,7 +115,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     wxInitAllImageHandlers();
 
     //// STUDENT CODE
-    ////
+    //// Task 1: make _chatLogic and exclusive resource
 
     // create chat logic instance
     _chatLogic = new ChatLogic(); 
@@ -133,7 +133,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
 ChatBotPanelDialog::~ChatBotPanelDialog()
 {
     //// STUDENT CODE
-    ////
+    //// Task 1: make _chatLogic and exclusive resource to class ChatPanelDialog
 
     delete _chatLogic;
 

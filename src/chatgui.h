@@ -14,7 +14,11 @@ private:
     wxBitmap _image;
 
     //// STUDENT CODE
-    ////
+    //// Task 1 : make _chatLogic an exclusive resource to class
+    //// ChatPanelDialog using an appropriate smart pointer.
+    //// Note that changes will need to be made so that
+    //// data structures and function parameters reflect the new structure.
+    //// Probably a unique pointer.
 
     ChatLogic *_chatLogic;
 

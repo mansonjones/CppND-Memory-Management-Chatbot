@@ -11,6 +11,7 @@
 #include "chatbot.h"
 #include "chatlogic.h"
 
+#include <iostream>  // delete when done debugging
 
 ChatLogic::ChatLogic()
 {
@@ -33,12 +34,22 @@ ChatLogic::~ChatLogic()
     ////
 
     // delete chatbot instance
-    delete _chatBot;
+    if (_chatBot != nullptr) {
+      delete _chatBot;
+      _chatBot = nullptr;
+    } 
 
     // delete all nodes
-    for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
+    for (auto it = std::begin(_nodes); it != std::end(_nodes);)
     {
-        delete *it;
+        if (*it != nullptr) 
+        {
+          delete *it;
+          it = _nodes.erase(it);
+        } else 
+        {
+          ++it;
+        }
     }
 
     // delete all edges
@@ -123,7 +134,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                     // node-based processing
                     if (type->second == "NODE")
                     {
-                        //// STUDENT CODE
+                        //// STUDENT CODE - Task 3
                         ////
 
                         // check if node with this ID exists already

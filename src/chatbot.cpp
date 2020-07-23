@@ -8,6 +8,8 @@
 #include "graphedge.h"
 #include "chatbot.h"
 
+#include <iostream> // can remove when done debugging
+
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot()
 {
@@ -42,9 +44,65 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE
+//// STUDENT CODE -  Task 2 : The Rule of Five
 ////
 
+// Copy Constructor
+
+ChatBot::ChatBot(const ChatBot &source) 
+{
+   std::cout << "calling copy constructor " << std::endl;
+
+   // owned data handles
+   // question: How to copy the bitmap?
+   //
+   _image = source._image;
+
+   // unowned data handles
+   _currentNode = source._currentNode;
+   _rootNode = source._rootNode;
+   _chatLogic = source._chatLogic;
+}
+
+// Copy Assignment Operator
+
+ChatBot &ChatBot::operator=(const ChatBot &source)
+{
+   std::cout << "calling copy assignment operator " << std::endl;
+   // Protect against self-assignment
+   if (this == &source) {
+      return *this;
+   }
+   // owned data handles
+   _image = source._image;
+
+   // unowned data handles
+   _currentNode = source._currentNode;
+   _rootNode = source._rootNode;
+   _chatLogic = source._chatLogic;
+
+   return *this;
+}
+
+// Move Constructor
+ChatBot::ChatBot(ChatBot &&source) 
+{
+   std::cout << " calling ChatBot move constructor " << std::endl;
+   // TODO: complete the code for this.
+    
+}
+
+// Move Assignment Operator
+ChatBot &ChatBot::operator = (ChatBot &&source)
+{
+   std::cout << " calling ChatBot move assignment operator " << std::endl;
+   // Protect against self-assignment
+   if (this == &source) {
+      return *this;
+   }
+   // TODO: Complete the code for this.
+   return *this;
+}
 ////
 //// EOF STUDENT CODE
 

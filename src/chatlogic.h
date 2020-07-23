@@ -13,15 +13,21 @@ class GraphNode;
 class ChatLogic
 {
 private:
-    //// STUDENT CODE
-    ////
+    //// STUDENT CODE - Task 3
+    //// Task 3 - exclusive ownership
+    //// Adapt vector _nodes in a way that instances of 
+    //// GraphNodes to which the vector elements refer
+    //// are exclusively owned by the class ChatLogic.
+    //// Use an appropriate type of smart pointer to 
+    //// achieve this.
 
+    //// Task 4. change ownership of all instances of GraphEdge
     // data handles (owned)
     std::vector<GraphNode *> _nodes;
     std::vector<GraphEdge *> _edges;
 
     ////
-    //// EOF STUDENT CODE
+    //// EOF STUDENT CODE - Task 3
 
     // data handles (not owned)
     GraphNode *_currentNode;
