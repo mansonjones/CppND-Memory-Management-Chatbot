@@ -11,12 +11,22 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
+    // I would think that this should work,
+    // but it does not.
+    // Deleting this code prevents a crash
+    // during shutdown of the app.
+    // It is a violation of RAII to delete
+    // _chatBot here, since it is not created
+    // in the constructor.
+    // Be sure to ask about this in the notes
+    // for the project review.
+    /*
     if (_chatBot != nullptr) 
     {
       delete _chatBot;
       _chatBot = nullptr; 
     }
-
+    */
     ////
     //// EOF STUDENT CODE
 }
