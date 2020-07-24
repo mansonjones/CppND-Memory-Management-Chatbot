@@ -20,7 +20,8 @@ private:
     //// data structures and function parameters reflect the new structure.
     //// Probably a unique pointer.
 
-    ChatLogic *_chatLogic;
+    // ChatLogic *_chatLogic;  // original code using raw pointer
+    std::unique_ptr<ChatLogic> _chatLogic;
 
     ////
     //// EOF STUDENT CODE
@@ -31,7 +32,9 @@ public:
     ~ChatBotPanelDialog();
 
     // getter / setter
-    ChatLogic *GetChatLogicHandle() { return _chatLogic; }
+    // Need to decide whether to return the raw pointer,
+    // or have GetChatLogicHandle() return a unique pointer.
+    ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); }
 
     // events
     void paintEvent(wxPaintEvent &evt);
