@@ -6,8 +6,6 @@
 #include "chatlogic.h"
 #include "chatgui.h"
 
-#include <iostream> // only needed for debugging
-
 // size of chatbot window
 const int width = 414;
 const int height = 736;
@@ -136,7 +134,6 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
 
 ChatBotPanelDialog::~ChatBotPanelDialog()
 {
-    std::cout << " ChatBotPanelDialog destructor " << std::endl;
     //// STUDENT CODE
     //// Task 1: make _chatLogic and exclusive resource to class ChatPanelDialog
 
