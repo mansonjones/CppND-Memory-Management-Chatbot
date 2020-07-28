@@ -44,14 +44,14 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE -  Task 2 : The Rule of Five
+//// STUDENT CODE -  Task 2 : Apply rule of five.
 ////
 
 // Copy Constructor
 
 ChatBot::ChatBot(const ChatBot &source) 
 {
-   std::cout << "calling copy constructor " << std::endl;
+   std::cout << "ChatBot Copy Constructor " << std::endl;
 
    // owned data handles
    // question: How to copy the bitmap?
@@ -68,7 +68,7 @@ ChatBot::ChatBot(const ChatBot &source)
 
 ChatBot &ChatBot::operator=(const ChatBot &source)
 {
-   std::cout << "calling copy assignment operator " << std::endl;
+   std::cout << "ChatBot Copy Assignment " << std::endl;
    // Protect against self-assignment
    if (this == &source) {
       return *this;
@@ -87,7 +87,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
 // Move Constructor
 ChatBot::ChatBot(ChatBot &&source) 
 {
-   std::cout << " calling ChatBot move constructor " << std::endl;
+   std::cout << " ChatBot Move Constructor " << std::endl;
    // TODO: complete the code for this.
     
 }
@@ -95,7 +95,7 @@ ChatBot::ChatBot(ChatBot &&source)
 // Move Assignment Operator
 ChatBot &ChatBot::operator = (ChatBot &&source)
 {
-   std::cout << " calling ChatBot move assignment operator " << std::endl;
+   std::cout << " ChatBot Move Assignment " << std::endl;
    // Protect against self-assignment
    if (this == &source) {
       return *this;

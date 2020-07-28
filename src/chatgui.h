@@ -32,8 +32,11 @@ public:
     ~ChatBotPanelDialog();
 
     // getter / setter
-    // Need to decide whether to return the raw pointer,
-    // or have GetChatLogicHandle() return a unique pointer.
+    // The function GetChatLogicHandle returns a raw 
+    // pointer, even though the underlying ChatLogic object is
+    // managed using a unique pointer.  This is because the 
+    // user does not need to access the pointer properties.
+    // TODO : Cite the appropriate C++ guideline from Section R. 
     ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); }
 
     // events

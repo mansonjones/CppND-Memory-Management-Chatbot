@@ -114,13 +114,16 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     // allow for PNG images to be handled
     wxInitAllImageHandlers();
 
-    //// STUDENT CODE
+    //// STUDENT CODE Task 1
     //// Task 1: make _chatLogic and exclusive resource
-
+    //// Note that R. 22 in the C++ guidelines recommends that
+    //// use of make_unique() to make a std::unique_ptr
     // create chat logic instance
     // _chatLogic = new ChatLogic();   // original code with raw pointer
     // Note this can also be done in the memoby initialization list
-    _chatLogic = std::unique_ptr<ChatLogic>(new ChatLogic()); 
+    // Question: Better to use make_unique<ChatLogic>()
+    _chatLogic = std::make_unique<ChatLogic>();
+    // _chatLogic = std::unique_ptr<ChatLogic>(new ChatLogic()); 
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
@@ -134,7 +137,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
 
 ChatBotPanelDialog::~ChatBotPanelDialog()
 {
-    //// STUDENT CODE
+    //// STUDENT CODE Task 1
     //// Task 1: make _chatLogic and exclusive resource to class ChatPanelDialog
 
     // delete _chatLogic; // original code
