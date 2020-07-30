@@ -96,6 +96,9 @@ ChatBot::ChatBot(ChatBot &&source)
    // TODO: complete the code for this.
    // Not sure what to do about the image
    // owned data handles
+   // To allocate memory on the heap for a wxBitmap object, use
+   // new wxBitMap()  (no need to pass the string).
+   // Can I use a copy constructor here?
    _image = source._image;
     
    // unowned data handles
