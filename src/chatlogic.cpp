@@ -163,8 +163,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                         if (parentToken != tokens.end() && childToken != tokens.end())
                         {
                             // get iterator on incoming and outgoing node via ID search
-                            auto parentNode = std::find_if(_nodes.begin(), _nodes.end(), [&parentToken](std::unique_ptr<GraphNode>&  node ) { return node->GetID() == std::stoi(parentToken->second); });
-                            auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](std::unique_ptr<GraphNode>&  node ) { return node->GetID() == std::stoi(childToken->second); });
+                            auto parentNode = std::find_if(_nodes.begin(), _nodes.end(), [&parentToken](const std::unique_ptr<GraphNode>  &node ) { return node->GetID() == std::stoi(parentToken->second); });
+                            auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](const std::unique_ptr<GraphNode>  &node ) { return node->GetID() == std::stoi(childToken->second); });
 
 
                             // create new edge
@@ -226,6 +226,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     // Task 5: Create a local ChatBot instance on the stack
     // Use move semantics to pass the 'ChatBot' instance into the root node.
     // add chatbot to graph root node
+    // The final version should be something like this;
+    // auto chatBot = CahtBot("../images/chatbot.png");
+    // rootNode->MoveChatbotHere(std::move(chatBot));
     _chatBot->SetRootNode(rootNode);
     rootNode->MoveChatbotHere(_chatBot);
     

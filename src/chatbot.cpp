@@ -53,18 +53,15 @@ ChatBot::ChatBot(const ChatBot &source)
 {
    std::cout << "ChatBot Copy Constructor " << std::endl;
 
-   // owned data handles
-   // question: How to copy the bitmap?
-   //
-   // Not sure about the syntax of allocating the wxBitmap()
-   // Check the wxwidgets documentation.
-   // _image = new wxBitmap();
-   _image = source._image;
+   // _image is the only owned data handle
+   _image = new wxBitmap();
+   *_image = *source._image;
 
    // unowned data handles
-   _currentNode = source._currentNode;
-   _rootNode = source._rootNode;
-   _chatLogic = source._chatLogic;
+    _currentNode = source._currentNode;  // does this need to be included?
+   _rootNode = source._rootNode;  // can also use SetRootNode(source.rootNode)
+   _chatLogic = source._chatLogic; // can also use SetChatLogicHandle
+   _chatLogic->SetChatbotHandle(this);
 }
 
 // Copy Assignment Operator
@@ -76,11 +73,12 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
    if (this == &source) {
       return *this;
    }
-   // owned data handles
-   _image = source._image;
+   // _image is the only owned data handle
+   _image = new wxBitmap();
+   *_image = *source._image;
 
    // unowned data handles
-   _currentNode = source._currentNode;
+   _currentNode = source._currentNode; // does this need to be included?
    _rootNode = source._rootNode;
    _chatLogic = source._chatLogic;
 
@@ -99,17 +97,22 @@ ChatBot::ChatBot(ChatBot &&source)
    // To allocate memory on the heap for a wxBitmap object, use
    // new wxBitMap()  (no need to pass the string).
    // Can I use a copy constructor here?
-   _image = source._image;
+   // _image is the only owned data handle.
+   _image = new wxBitmap();
+   *_image = *source._image;
     
    // unowned data handles
-   _currentNode = source._currentNode;
+   _image = source._image;
+   // _currentNode = source._currentNode;  // does this need to be included?
    _rootNode = source._rootNode;
    _chatLogic = source._chatLogic;    
 
    // invalidate source members
-   _currentNode = nullptr;
-   _rootNode = nullptr;
-   _chatLogic = nullptr;
+   source._chatLogic = nullptr;
+   source._currentNode = nullptr;
+   source._rootNode = nullptr;
+   delete source._image;
+   source._image = NULL;
 }
 
 // Move Assignment Operator
@@ -121,18 +124,22 @@ ChatBot &ChatBot::operator = (ChatBot &&source)
       return *this;
    }
    
-   // owned data handles
-   _image = source._image;
+   // _image is the only owned data handle.
+   _image = new wxBitmap();
+   *_image = *source._image;
 
    // unowned data handles
    _currentNode = source._currentNode;
    _rootNode = source._rootNode;
    _chatLogic = source._chatLogic;
+   _image = source._image;
 
    // invalidate source members
-   _currentNode = nullptr;
-   _rootNode = nullptr;
-   _chatLogic = nullptr;
+   source._currentNode = nullptr;
+   source._rootNode = nullptr;
+   source._chatLogic = nullptr;
+   delete source._image;
+   source._image = NULL;
    // TODO: Complete the code for this.
    return *this;
 }

@@ -16,10 +16,14 @@ private:
     ////
 
     // data handles (owned)
+    // For tasks 4 & 5, convert to 
+    // std::vector< std::unique_ptr<GraphEdge> > _childEdges;
     std::vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
 
     // data handles (not owned)
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
+    // pretty sure that this should eventually be changed to
+    // ChatBot _chatBot;  Without the pointer.
     ChatBot *_chatBot;
 
     ////
@@ -46,9 +50,10 @@ public:
     void AddEdgeToParentNode(GraphEdge *edge);
     void AddEdgeToChildNode(GraphEdge *edge);
 
-    //// STUDENT CODE
+    //// STUDENT CODE - Task 5
     ////
-
+    //// The final version should be MoveChatbotHere(ChatBot chatbot)
+    
     void MoveChatbotHere(ChatBot *chatbot);
 
     ////

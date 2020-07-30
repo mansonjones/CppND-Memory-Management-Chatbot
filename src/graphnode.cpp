@@ -35,13 +35,26 @@ void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
     _childEdges.push_back(edge);
 }
 
-//// STUDENT CODE
-////
+//// STUDENT CODE - Task 5
+//// See  https://knowledge.udacity.com/questions/77646
+//// the final version should be
+//// void GraphNode::MoveChatbotHere(ChatBot chatbot)
+//// {
+////  _chatBot = ChatBot(std::move(chatbot));
+////  _chatBot.setCurrentNode(this);
+//// }
 void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 {
     _chatBot = chatbot;
     _chatBot->SetCurrentNode(this);
 }
+
+
+// The final version should be
+// void GraphNode;:MoveChatbotToNewNode(GraphNode *newNode)
+// {
+//   newNode->MoveChatbotHere(std::move(_chatbot));
+// }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
