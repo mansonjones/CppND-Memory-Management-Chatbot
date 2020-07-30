@@ -37,7 +37,10 @@ public:
     // managed using a unique pointer.  This is because the 
     // user does not need to access the pointer properties.
     // TODO : Cite the appropriate C++ guideline from Section R. 
-    ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); }
+    ChatLogic *GetChatLogicHandle() 
+    { 
+      return _chatLogic.get(); 
+    }
 
     // events
     void paintEvent(wxPaintEvent &evt);

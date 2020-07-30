@@ -56,6 +56,9 @@ ChatBot::ChatBot(const ChatBot &source)
    // owned data handles
    // question: How to copy the bitmap?
    //
+   // Not sure about the syntax of allocating the wxBitmap()
+   // Check the wxwidgets documentation.
+   // _image = new wxBitmap();
    _image = source._image;
 
    // unowned data handles
@@ -88,8 +91,22 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
 ChatBot::ChatBot(ChatBot &&source) 
 {
    std::cout << " ChatBot Move Constructor " << std::endl;
+   // The source instance will no longer be usable after
+   // the move constructor is finished.
    // TODO: complete the code for this.
+   // Not sure what to do about the image
+   // owned data handles
+   _image = source._image;
     
+   // unowned data handles
+   _currentNode = source._currentNode;
+   _rootNode = source._rootNode;
+   _chatLogic = source._chatLogic;    
+
+   // invalidate source members
+   _currentNode = nullptr;
+   _rootNode = nullptr;
+   _chatLogic = nullptr;
 }
 
 // Move Assignment Operator
@@ -100,6 +117,19 @@ ChatBot &ChatBot::operator = (ChatBot &&source)
    if (this == &source) {
       return *this;
    }
+   
+   // owned data handles
+   _image = source._image;
+
+   // unowned data handles
+   _currentNode = source._currentNode;
+   _rootNode = source._rootNode;
+   _chatLogic = source._chatLogic;
+
+   // invalidate source members
+   _currentNode = nullptr;
+   _rootNode = nullptr;
+   _chatLogic = nullptr;
    // TODO: Complete the code for this.
    return *this;
 }

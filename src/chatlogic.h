@@ -23,7 +23,9 @@ private:
 
     //// Task 4. change ownership of all instances of GraphEdge
     // data handles (owned)
-    std::vector<GraphNode *> _nodes;
+ //   std::vector<GraphNode *> _nodes;
+    
+    std::vector< std::unique_ptr<GraphNode> > _nodes;
     std::vector<GraphEdge *> _edges;
 
     ////

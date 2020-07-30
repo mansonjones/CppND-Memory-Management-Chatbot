@@ -31,6 +31,7 @@ public:
     // Note: For the project review, be sure to ask about
     // the use of const.  
     // Copy Constructor
+    // Is it a better practice to remove source?
     ChatBot(const ChatBot &source);
 
     // Copy Assignment Operator
