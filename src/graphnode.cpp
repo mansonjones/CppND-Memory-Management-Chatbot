@@ -8,7 +8,7 @@ GraphNode::GraphNode(int id)
 
 GraphNode::~GraphNode()
 {
-    //// STUDENT CODE
+    //// STUDENT CODE - Warm up task
 
     //// Warm up task - the program crashes when you close
     //// the window.  The crash occured because _chatbot
@@ -17,7 +17,7 @@ GraphNode::~GraphNode()
     //// are allocated in the constructor should be
     //// deallocted in the destructor.
 
-    //// EOF STUDENT CODE
+    //// EOF STUDENT CODE - Warm up task
 }
 
 void GraphNode::AddToken(std::string token)
@@ -30,9 +30,10 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge)
     _parentEdges.push_back(edge);
 }
 
-void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
+// Task 4
+void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 {
-    _childEdges.push_back(edge);
+    _childEdges.push_back(std::move(edge));
 }
 
 //// STUDENT CODE - Task 5
@@ -69,7 +70,7 @@ GraphEdge *GraphNode::GetChildEdgeAtIndex(int index)
     //// STUDENT CODE
     ////
 
-    return _childEdges[index];
+    return _childEdges[index].get();
 
     ////
     //// EOF STUDENT CODE
