@@ -11,25 +11,17 @@
 #include <iostream> // can remove when done debugging
 
 // constructor WITHOUT memory allocation
-ChatBot::ChatBot()
+ChatBot::ChatBot() : _image(nullptr), _rootNode(nullptr), _chatLogic(nullptr)
 {
-    // invalidate data handles
-    _image = nullptr;
-    _chatLogic = nullptr;
-    _rootNode = nullptr;
+    std::cout << "ChatBot Constructor without memory allocation" << std::endl;
+   // Question: Should _currentNode be set to nullptr in the initialization list?
 }
 
 // constructor WITH memory allocation
-ChatBot::ChatBot(std::string filename)
+ChatBot::ChatBot(std::string filename) : _image(new wxBitmap(filename, wxBITMAP_TYPE_PNG)), _rootNode(nullptr), _chatLogic(nullptr) 
 {
-    std::cout << "ChatBot Constructor" << std::endl;
-    
-    // invalidate data handles
-    _chatLogic = nullptr;
-    _rootNode = nullptr;
-
-    // load image into heap memory
-    _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
+    std::cout << "ChatBot Constructor with memory allocation" << std::endl;
+    // Question: Should _currentNode be set to nullptr in the initialization list? 
 }
 
 ChatBot::~ChatBot()
@@ -49,24 +41,18 @@ ChatBot::~ChatBot()
 
 // Copy Constructor
 
-ChatBot::ChatBot(const ChatBot &source) 
+ChatBot::ChatBot(const ChatBot &source) : _image(new wxBitmap()), _rootNode(source._rootNode), _chatLogic(source._chatLogic)  
 {
    std::cout << "ChatBot Copy Constructor " << std::endl;
 
-   // _image is the only owned data handle
-   _image = new wxBitmap();
    *_image = *source._image;
 
-   // unowned data handles
-    _currentNode = source._currentNode;  // does this need to be included?
-   _rootNode = source._rootNode;  // can also use SetRootNode(source.rootNode)
-   _chatLogic = source._chatLogic; // can also use SetChatLogicHandle
    _chatLogic->SetChatbotHandle(this);
 }
 
 // Copy Assignment Operator
 
-ChatBot &ChatBot::operator=(const ChatBot &source)
+ChatBot &ChatBot::operator=(const ChatBot &source) 
 {
    std::cout << "ChatBot Copy Assignment " << std::endl;
    // Protect against self-assignment
@@ -74,45 +60,37 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
       return *this;
    }
    // _image is the only owned data handle
+   if (_image != NULL) 
+   {
+     delete _image;
+   }
    _image = new wxBitmap();
    *_image = *source._image;
 
-   // unowned data handles
-   _currentNode = source._currentNode; // does this need to be included?
-   _rootNode = source._rootNode;
-   _chatLogic = source._chatLogic;
+   SetCurrentNode(source._currentNode);
+   SetRootNode(source._rootNode);
+   SetChatLogicHandle(source._chatLogic);
 
    return *this;
 }
 
 // Move Constructor
-ChatBot::ChatBot(ChatBot &&source) 
+ChatBot::ChatBot(ChatBot &&source) : _image(new wxBitmap()), _rootNode(source._rootNode), _chatLogic(source._chatLogic) 
 {
    std::cout << " ChatBot Move Constructor " << std::endl;
    // The source instance will no longer be usable after
    // the move constructor is finished.
-   // TODO: complete the code for this.
-   // Not sure what to do about the image
-   // owned data handles
-   // To allocate memory on the heap for a wxBitmap object, use
-   // new wxBitMap()  (no need to pass the string).
-   // Can I use a copy constructor here?
-   // _image is the only owned data handle.
-   _image = new wxBitmap();
    *_image = *source._image;
     
    // unowned data handles
    _image = source._image;
    // _currentNode = source._currentNode;  // does this need to be included?
-   _rootNode = source._rootNode;
-   _chatLogic = source._chatLogic;    
 
    // invalidate source members
-   source._chatLogic = nullptr;
-   source._currentNode = nullptr;
-   source._rootNode = nullptr;
-   delete source._image;
    source._image = NULL;
+   source.SetRootNode(nullptr);
+   source.SetChatLogicHandle(nullptr);
+   source.SetCurrentNode(nullptr);
 }
 
 // Move Assignment Operator
@@ -129,18 +107,17 @@ ChatBot &ChatBot::operator = (ChatBot &&source)
    *_image = *source._image;
 
    // unowned data handles
-   _currentNode = source._currentNode;
-   _rootNode = source._rootNode;
-   _chatLogic = source._chatLogic;
+   SetCurrentNode(source._currentNode);
+   SetRootNode(source._rootNode);
+   SetChatLogicHandle(source._chatLogic);
    _image = source._image;
 
    // invalidate source members
-   source._currentNode = nullptr;
-   source._rootNode = nullptr;
-   source._chatLogic = nullptr;
-   delete source._image;
+   source.SetCurrentNode(nullptr);
+   source.SetRootNode(nullptr);
+   source.SetChatLogicHandle(nullptr);
    source._image = NULL;
-   // TODO: Complete the code for this.
+   
    return *this;
 }
 ////
