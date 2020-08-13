@@ -7,6 +7,11 @@
 class GraphNode; // forward declaration
 class ChatLogic; // forward declaration
 
+// Refer to the program schematic
+// Owned by the class: _image
+// Not owned by the class: _currentNode, _rootNode, _chatLogic
+
+
 class ChatBot
 {
 private:

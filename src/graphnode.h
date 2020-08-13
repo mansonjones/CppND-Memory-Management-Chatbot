@@ -8,6 +8,10 @@
 // of the examples from the lectures.
 #include <memory>  
 
+// Refer to the Program schematic:
+// Owned by the class: _childEdges, _id, _answers.
+// Not owned by the class: _parentEdges, _chatBot.
+
 // forward declarations
 class GraphEdge;
 

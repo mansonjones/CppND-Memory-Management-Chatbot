@@ -6,6 +6,10 @@
 
 class GraphNode; // forward declaration
 
+// Refer to the program schematic:
+// Owned by the class: _keywords, _id
+// Not owned by the class: _childNode, _parentNode
+
 class GraphEdge
 {
 private:

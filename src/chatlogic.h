@@ -10,6 +10,11 @@ class ChatBot;
 class GraphEdge;
 class GraphNode;
 
+// Refer to the program schematic:
+// Owned by the class: _nodes
+// Not owned by the class: _currentNode, _chatBot, _panelDialog 
+
+
 class ChatLogic
 {
 private:
