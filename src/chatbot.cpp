@@ -18,6 +18,9 @@ ChatBot::ChatBot() : _image(nullptr), _rootNode(nullptr), _chatLogic(nullptr)
 }
 
 // constructor WITH memory allocation
+// Note that the order of the initialization list should be the same
+// as the order in which the variables are declared in the header file.
+
 ChatBot::ChatBot(std::string filename) : _image(new wxBitmap(filename, wxBITMAP_TYPE_PNG)), _rootNode(nullptr), _chatLogic(nullptr) 
 {
     std::cout << "ChatBot Constructor with memory allocation" << std::endl;
@@ -47,7 +50,11 @@ ChatBot::ChatBot(const ChatBot &source) : _image(new wxBitmap()), _rootNode(sour
 
    *_image = *source._image;
 
-   _chatLogic->SetChatbotHandle(this);
+
+   // Not sure if this next line is needed.  
+   // Typically the Copy Constructor is similar to the Constructor.
+   // Should this be included in the Constructor, or deleted from this Copy Constructor?
+   // _chatLogic->SetChatbotHandle(this);
 }
 
 // Copy Assignment Operator
@@ -80,11 +87,11 @@ ChatBot::ChatBot(ChatBot &&source) : _image(new wxBitmap()), _rootNode(source._r
    std::cout << " ChatBot Move Constructor " << std::endl;
    // The source instance will no longer be usable after
    // the move constructor is finished.
-   *_image = *source._image;
     
    // unowned data handles
    _image = source._image;
    // _currentNode = source._currentNode;  // does this need to be included?
+   // Question: Should _also be copied in the initialization list?
 
    // invalidate source members
    source._image = NULL;
@@ -103,14 +110,12 @@ ChatBot &ChatBot::operator = (ChatBot &&source)
    }
    
    // _image is the only owned data handle.
-   _image = new wxBitmap();
-   *_image = *source._image;
+   _image = source._image;
 
    // unowned data handles
    SetCurrentNode(source._currentNode);
    SetRootNode(source._rootNode);
    SetChatLogicHandle(source._chatLogic);
-   _image = source._image;
 
    // invalidate source members
    source.SetCurrentNode(nullptr);
