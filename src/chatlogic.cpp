@@ -220,7 +220,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     // Use move semantics to pass the 'ChatBot' instance into the root node.
     // add chatbot to graph root node
     // The final version should be something like this;
-    // auto chatBot = CahtBot("../images/chatbot.png");
+    // auto chatBot = ChatBot("../images/chatbot.png");
     // rootNode->MoveChatbotHere(std::move(chatBot));
     _chatBot->SetRootNode(rootNode);
     rootNode->MoveChatbotHere(_chatBot);
