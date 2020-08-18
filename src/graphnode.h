@@ -67,8 +67,8 @@ public:
 
     //// STUDENT CODE - Task 5
     ////
-#ifdef MOVE_SEMANTICS
-    void MoveChatbotHere(ChatBot chatbot)
+#ifdef MOVE_SEMANTICS_GRAPHNODE
+    void MoveChatbotHere(ChatBot chatbot);
 #else    
     void MoveChatbotHere(ChatBot *chatbot);
 #endif

@@ -223,7 +223,11 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 // #define MOVE_SEMANTICS_CHATLOGIC
 #ifdef MOVE_SEMANTICS_CHATLOGIC
       auto chatBot = ChatBot("../images/chatbot.png");
+      chatBot.SetChatLogicHandle(this);
+      chatBot.SetRootNode(rootNode);
+      _chatBot = &chatBot;
       rootNode->MoveChatbotHere(std::move(chatBot));
+
 #else 
     _chatBot->SetRootNode(rootNode);
     rootNode->MoveChatbotHere(_chatBot);

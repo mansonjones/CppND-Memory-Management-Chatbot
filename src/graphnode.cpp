@@ -39,7 +39,7 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 //// STUDENT CODE - Task 5
 //// See  https://knowledge.udacity.com/questions/77646
 //// the final version should be
-#ifdef MOVE_SEMANTICS
+#ifdef MOVE_SEMANTICS_GRAPHNODE
 void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
   _chatBot = ChatBot(std::move(chatbot));
@@ -56,11 +56,11 @@ void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 
 #endif
 
-#ifdef MOVE_SEMANTICS
+#ifdef MOVE_SEMANTICS_GRAPHNODE
 
-void GraphNode;:MoveChatbotToNewNode(GraphNode *newNode)
+void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-  newNode->MoveChatbotHere(std::move(_chatbot));
+  newNode->MoveChatbotHere(std::move(_chatBot));
 }
 
 #else 
