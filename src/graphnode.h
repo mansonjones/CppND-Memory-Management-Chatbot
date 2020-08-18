@@ -31,8 +31,14 @@ private:
     // data handles (not owned)
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
     // pretty sure that this should eventually be changed to
-    // ChatBot _chatBot;  Without the pointer.
+
+// #define MOVE_SEMANTICS_GRAPHNODE
+
+#ifdef MOVE_SEMANTICS_GRAPHNODE
+    ChatBot _chatBot;  // Without the pointer.
+#else
     ChatBot *_chatBot;
+#endif
 
     ////
     //// EOF STUDENT CODE - Task 4
@@ -61,10 +67,11 @@ public:
 
     //// STUDENT CODE - Task 5
     ////
-    //// The final version should be MoveChatbotHere(ChatBot chatbot)
-    
+#ifdef MOVE_SEMANTICS
+    void MoveChatbotHere(ChatBot chatbot)
+#else    
     void MoveChatbotHere(ChatBot *chatbot);
-
+#endif
     ////
     //// EOF STUDENT CODE
 
