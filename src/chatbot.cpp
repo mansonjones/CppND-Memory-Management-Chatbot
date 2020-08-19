@@ -21,7 +21,11 @@ ChatBot::ChatBot() : _image(nullptr), _rootNode(nullptr), _chatLogic(nullptr)
 // Note that the order of the initialization list should be the same
 // as the order in which the variables are declared in the header file.
 
-ChatBot::ChatBot(std::string filename) : _image(new wxBitmap(filename, wxBITMAP_TYPE_PNG)), _rootNode(nullptr), _chatLogic(nullptr) 
+ChatBot::ChatBot(std::string filename) : 
+   _filename(filename), 
+   _image(new wxBitmap(filename, wxBITMAP_TYPE_PNG)), 
+   _rootNode(nullptr), 
+   _chatLogic(nullptr) 
 {
     std::cout << "ChatBot Constructor with memory allocation" << std::endl;
     // Question: Should _currentNode be set to nullptr in the initialization list? 
@@ -44,12 +48,13 @@ ChatBot::~ChatBot()
 
 // Copy Constructor
 
-ChatBot::ChatBot(const ChatBot &source) : _image(new wxBitmap()), _rootNode(source._rootNode), _chatLogic(source._chatLogic)  
+ChatBot::ChatBot(const ChatBot &source) : 
+   _filename(source._filename),
+   _image(new wxBitmap(source._filename, wxBITMAP_TYPE_PNG)), 
+   _rootNode(source._rootNode), 
+   _chatLogic(source._chatLogic)  
 {
    std::cout << "ChatBot Copy Constructor " << std::endl;
-
-   *_image = *source._image;
-
 
    // Not sure if this next line is needed.  
    // Typically the Copy Constructor is similar to the Constructor.
@@ -71,8 +76,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
    {
      delete _image;
    }
-   _image = new wxBitmap();
-   *_image = *source._image;
+   _image = new wxBitmap(source._filename, wxBITMAP_TYPE_PNG);
 
    SetCurrentNode(source._currentNode);
    SetRootNode(source._rootNode);
@@ -82,15 +86,17 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
 }
 
 // Move Constructor
-ChatBot::ChatBot(ChatBot &&source) : _image(new wxBitmap()), _rootNode(source._rootNode), _chatLogic(source._chatLogic) 
+ChatBot::ChatBot(ChatBot &&source) : 
+   _filename(source._filename),
+   _image(source._image), 
+   _rootNode(source._rootNode), 
+   _chatLogic(source._chatLogic) 
 {
    std::cout << " ChatBot Move Constructor " << std::endl;
    // The source instance will no longer be usable after
    // the move constructor is finished.
     
    // unowned data handles
-   _image = source._image;
-   // _currentNode = source._currentNode;  // does this need to be included?
    // Question: Should _also be copied in the initialization list?
 
    // invalidate source members

@@ -16,6 +16,7 @@ class ChatBot
 {
 private:
     // data handles (owned)
+    std::string _filename;
     wxBitmap *_image; // avatar image
 
     // data handles (not owned)
