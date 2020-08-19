@@ -76,8 +76,10 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
    {
      delete _image;
    }
+   _filename = source._filename;
    _image = new wxBitmap(source._filename, wxBITMAP_TYPE_PNG);
 
+   
    SetCurrentNode(source._currentNode);
    SetRootNode(source._rootNode);
    SetChatLogicHandle(source._chatLogic);
@@ -116,6 +118,11 @@ ChatBot &ChatBot::operator = (ChatBot &&source)
    }
    
    // _image is the only owned data handle.
+   if (_image != NULL) 
+   {
+     delete _image;
+   }
+   _filename = source._filename;
    _image = source._image;
 
    // unowned data handles
