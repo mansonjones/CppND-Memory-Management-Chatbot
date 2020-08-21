@@ -26,12 +26,18 @@ Your goal is to use the course knowledge to optimize the ChatBot program from a 
   * Mac: There is a [homebrew installation available](https://formulae.brew.sh/formula/wxmac).
   * Installation instructions can be found [here](https://wiki.wxwidgets.org/Install). Some version numbers may need to be changed in instructions to install v3.0 or greater.
 
+
+
+
 ## Basic Build Instructions
 
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./membot`.
+
+## Running in debug mode
+1. Compile: `cmake -DCMAKE_BUILD_TYPE=Debug .. && make`
 
 ## Project Task Details
 
