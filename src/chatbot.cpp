@@ -11,7 +11,7 @@
 #include <iostream> // can remove when done debugging
 
 // constructor WITHOUT memory allocation
-ChatBot::ChatBot() : _image(nullptr), _rootNode(nullptr), _chatLogic(nullptr)
+ChatBot::ChatBot() : _image(nullptr), _currentNode(nullptr),_rootNode(nullptr), _chatLogic(nullptr)
 {
     std::cout << "ChatBot Constructor without memory allocation" << std::endl;
    // Question: Should _currentNode be set to nullptr in the initialization list?
@@ -24,6 +24,7 @@ ChatBot::ChatBot() : _image(nullptr), _rootNode(nullptr), _chatLogic(nullptr)
 ChatBot::ChatBot(std::string filename) : 
    _filename(filename), 
    _image(new wxBitmap(filename, wxBITMAP_TYPE_PNG)), 
+   _currentNode(nullptr),
    _rootNode(nullptr), 
    _chatLogic(nullptr) 
 {
@@ -51,6 +52,7 @@ ChatBot::~ChatBot()
 ChatBot::ChatBot(const ChatBot &source) : 
    _filename(source._filename),
    _image(new wxBitmap(source._filename, wxBITMAP_TYPE_PNG)), 
+   _currentNode(source._currentNode),
    _rootNode(source._rootNode), 
    _chatLogic(source._chatLogic)  
 {
@@ -80,7 +82,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
    _image = new wxBitmap(source._filename, wxBITMAP_TYPE_PNG);
 
    
-   SetCurrentNode(source._currentNode);
+   _currentNode = source._currentNode;
    SetRootNode(source._rootNode);
    SetChatLogicHandle(source._chatLogic);
 
@@ -91,6 +93,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
 ChatBot::ChatBot(ChatBot &&source) : 
    _filename(source._filename),
    _image(source._image), 
+   _currentNode(source._currentNode),
    _rootNode(source._rootNode), 
    _chatLogic(source._chatLogic) 
 {
@@ -100,12 +103,13 @@ ChatBot::ChatBot(ChatBot &&source) :
     
    // unowned data handles
    // Question: Should _also be copied in the initialization list?
+   _chatLogic->SetChatbotHandle(this);
 
    // invalidate source members
    source._image = NULL;
    source.SetRootNode(nullptr);
    source.SetChatLogicHandle(nullptr);
-   source.SetCurrentNode(nullptr);
+   source._currentNode = nullptr;
 }
 
 // Move Assignment Operator
@@ -126,12 +130,14 @@ ChatBot &ChatBot::operator = (ChatBot &&source)
    _image = source._image;
 
    // unowned data handles
-   SetCurrentNode(source._currentNode);
+   _currentNode = source._currentNode;
    SetRootNode(source._rootNode);
    SetChatLogicHandle(source._chatLogic);
 
+   _chatLogic->SetChatbotHandle(this);
+
    // invalidate source members
-   source.SetCurrentNode(nullptr);
+   _currentNode = nullptr;
    source.SetRootNode(nullptr);
    source.SetChatLogicHandle(nullptr);
    source._image = NULL;
