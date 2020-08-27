@@ -220,8 +220,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     // Use move semantics to pass the 'ChatBot' instance into the root node.
     // add chatbot to graph root node
     // The final version should be something like this;
-// #define MOVE_SEMANTICS_CHATLOGIC
-#ifdef MOVE_SEMANTICS_CHATLOGIC
+#ifdef MOVE_SEMANTICS_TASK_5
       auto chatBot = ChatBot("../images/chatbot.png");
       chatBot.SetChatLogicHandle(this);
       chatBot.SetRootNode(rootNode);

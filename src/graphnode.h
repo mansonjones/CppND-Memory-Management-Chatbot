@@ -8,6 +8,9 @@
 // of the examples from the lectures.
 #include <memory>  
 
+// For debugging only.  Eventually this dependency should be removed.
+#include "move_semantics_task_5.h"
+
 // Refer to the Program schematic:
 // Owned by the class: _childEdges, _id, _answers.
 // Not owned by the class: _parentEdges, _chatBot.
@@ -32,9 +35,7 @@ private:
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
     // pretty sure that this should eventually be changed to
 
-// #define MOVE_SEMANTICS_GRAPHNODE
-
-#ifdef MOVE_SEMANTICS_GRAPHNODE
+#ifdef MOVE_SEMANTICS_TASK_5
     ChatBot _chatBot;  // Without the pointer.
 #else
     ChatBot *_chatBot;
@@ -67,7 +68,7 @@ public:
 
     //// STUDENT CODE - Task 5
     ////
-#ifdef MOVE_SEMANTICS_GRAPHNODE
+#ifdef MOVE_SEMANTICS_TASK_5
     void MoveChatbotHere(ChatBot chatbot);
 #else    
     void MoveChatbotHere(ChatBot *chatbot);

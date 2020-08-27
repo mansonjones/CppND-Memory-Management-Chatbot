@@ -5,6 +5,9 @@
 #include <string>
 #include "chatgui.h"
 
+// for debugging only.  eventually this should be removed.
+#include "move_semantics_task_5.h"
+
 // forward declarations
 class ChatBot;
 class GraphEdge;
