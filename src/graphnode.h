@@ -35,11 +35,7 @@ private:
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
     // pretty sure that this should eventually be changed to
 
-#ifdef MOVE_SEMANTICS_TASK_5
-    ChatBot _chatBot;  // Without the pointer.
-#else
-    ChatBot *_chatBot;
-#endif
+    ChatBot _chatBot; 
 
     ////
     //// EOF STUDENT CODE - Task 4
@@ -68,11 +64,7 @@ public:
 
     //// STUDENT CODE - Task 5
     ////
-#ifdef MOVE_SEMANTICS_TASK_5
     void MoveChatbotHere(ChatBot chatbot);
-#else    
-    void MoveChatbotHere(ChatBot *chatbot);
-#endif
     ////
     //// EOF STUDENT CODE
 

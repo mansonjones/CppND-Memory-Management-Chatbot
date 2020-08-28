@@ -39,38 +39,18 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 //// STUDENT CODE - Task 5
 //// See  https://knowledge.udacity.com/questions/77646
 //// the final version should be
-#ifdef MOVE_SEMANTICS_TASK_5
+
 void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
-  _chatBot = ChatBot(std::move(chatbot));
+  _chatBot = std::move(chatbot);
   _chatBot.SetCurrentNode(this);
 }
-
-#else
-
-void GraphNode::MoveChatbotHere(ChatBot *chatbot)
-{
-    _chatBot = chatbot;
-    _chatBot->SetCurrentNode(this);
-}
-
-#endif
-
-#ifdef MOVE_SEMANTICS_TASK_5
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
   newNode->MoveChatbotHere(std::move(_chatBot));
 }
 
-#else 
-void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
-{
-    newNode->MoveChatbotHere(_chatBot);
-    _chatBot = nullptr; // invalidate pointer at source
-}
-
-#endif
 ////
 //// EOF STUDENT CODE
 
