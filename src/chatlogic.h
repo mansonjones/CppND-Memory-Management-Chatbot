@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <string>
+
+#include <memory>     // required when using std::unique_ptr
+
 #include "chatgui.h"
 
 // for debugging only.  eventually this should be removed.

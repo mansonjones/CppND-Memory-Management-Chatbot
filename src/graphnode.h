@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <memory>   // required for std::unique_ptr
+
 #include "chatbot.h"
 // Note sure if this next line is needed.  It's included in some
 // of the examples from the lectures.
